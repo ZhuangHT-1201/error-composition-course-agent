@@ -10,7 +10,7 @@ async function run() {
   const root = path.resolve(__dirname, "..");
   const outputDir = process.argv[2] || path.resolve(root, "qa");
   fs.mkdirSync(outputDir, { recursive: true });
-  const url = pathToFileURL(path.join(root, "index.html")).href;
+  const url = process.env.AGENT_URL || pathToFileURL(path.join(root, "index.html")).href;
 
   const browser = await chromium.launch({
     headless: true,

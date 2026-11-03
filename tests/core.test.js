@@ -50,6 +50,20 @@ const cases = [
       assert.equal(result.kind, "scope");
       assert.match(result.title, /超出/);
     }
+  },
+  {
+    query: "不确定度A类和B类怎样区分？",
+    check: (result) => {
+      assert.equal(result.id, "classes_ab");
+      assert.match(result.headline, /评定方法/);
+    }
+  },
+  {
+    query: "重复测量6次，单次标准差0.12，平均值的标准不确定度是多少？",
+    check: (result) => {
+      assert.equal(result.id, "mean");
+      assert.match(result.formula, /sqrt/);
+    }
   }
 ];
 
