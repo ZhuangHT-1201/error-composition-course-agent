@@ -3,147 +3,183 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="面向测量误差合成的课程知识智能体，支持分层问答、范围判断、公式解释与独立分量计算。">
-  <meta name="theme-color" content="#102b2d">
-  <title>误差合成课堂助手</title>
+  <meta name="description" content="Bilingual measurement uncertainty course assistant with a local knowledge engine and optional DeepSeek enhancement.">
+  <meta name="theme-color" content="#2447ff">
+  <title>误差合成实验室 | Error Propagation Lab</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <a class="skip-link" href="#chat-panel">跳到问答区</a>
+  <a class="skip-link" href="#chat-panel" data-i18n="skip">跳到问答区</a>
 
   <header class="site-header">
-    <a class="brand" href="./" aria-label="误差合成课堂助手首页">
+    <a class="brand" href="./" aria-label="Error Propagation Lab">
       <span class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 32 32" role="img">
-          <path d="M7 23.5 14.8 8l3.5 7.3L23 9l2 14.5H7Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
-          <path d="M11 19.5h11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        <svg viewBox="0 0 36 36">
+          <path d="M7 25.5c4.2 0 4.2-15 8.5-15s4.3 15 8.5 15 4.2-9 6.8-9" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"/>
+          <circle cx="30.8" cy="16.5" r="2.2" fill="#ffd36a"/>
         </svg>
       </span>
-      <span>
-        <strong>测量课程</strong>
-        <small>误差合成 · 知识助手</small>
+      <span class="brand-copy">
+        <strong>Error Propagation Lab</strong>
+        <small data-i18n="brandSub">测量课程知识助手</small>
       </span>
     </a>
 
-    <nav class="top-nav" aria-label="主导航">
-      <a href="#chat-panel">课程问答</a>
-      <a href="#calculator">快速计算</a>
-      <a href="#sources">知识依据</a>
+    <nav class="top-nav" aria-label="Primary navigation">
+      <a href="#chat-panel" data-i18n="navAsk">课程问答</a>
+      <a href="#tools" data-i18n="navTools">计算工具</a>
+      <a href="#sources" data-i18n="navSources">知识依据</a>
     </nav>
 
-    <div class="availability" aria-label="服务状态">
-      <span class="status-dot" aria-hidden="true"></span>
-      可直接使用
+    <div class="header-actions">
+      <button class="engine-pill" id="engine-pill" type="button" data-open-settings>
+        <span class="status-dot" aria-hidden="true"></span>
+        <span id="engine-pill-text">本地引擎</span>
+      </button>
+      <button class="language-toggle" id="language-toggle" type="button" aria-label="Switch language">EN</button>
+      <button class="settings-button" id="open-settings" type="button" data-open-settings aria-label="Open settings" title="Settings">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 8.2a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6Zm8 4.8-1.8.7a6.5 6.5 0 0 1-.6 1.4l.8 1.8-2.2 2.2-1.8-.8a6.6 6.6 0 0 1-1.4.6L12.3 21h-3l-.7-2.1a6.5 6.5 0 0 1-1.4-.6l-1.8.8-2.2-2.2.8-1.8a6.6 6.6 0 0 1-.6-1.4L1 13v-3l2.1-.7a6.6 6.6 0 0 1 .6-1.4l-.8-1.8 2.2-2.2 1.8.8a6.5 6.5 0 0 1 1.4-.6L9 1h3l.7 2.1a6.6 6.6 0 0 1 1.4.6l1.8-.8 2.2 2.2-.8 1.8a6.5 6.5 0 0 1 .6 1.4L20 10v3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </div>
   </header>
 
   <main>
     <section class="hero" aria-labelledby="page-title">
       <div class="hero-copy">
-        <p class="eyebrow">测量误差与不确定度</p>
-        <h1 id="page-title">误差合成课堂助手</h1>
-        <p class="hero-intro">把课程中的误差传递、独立合成、相关性、A 类与 B 类评定和扩展不确定度放进同一个问答空间。回答会给出适用条件，并标出知识依据。</p>
-        <div class="hero-meta" aria-label="主要功能">
-          <span>按难度分层</span>
-          <span>公式可追溯</span>
-          <span>超范围拒答</span>
+        <div class="hero-kicker">
+          <span class="pulse-dot" aria-hidden="true"></span>
+          <span data-i18n="heroKicker">测量误差与不确定度 · 双语知识智能体</span>
+        </div>
+        <h1 id="page-title" data-i18n="heroTitle">误差合成实验室</h1>
+        <p class="hero-subtitle" data-i18n="heroSubtitle">从测量模型到最终不确定度，边问边算，并把每个假设讲清楚。</p>
+        <p class="hero-intro" data-i18n="heroIntro">内置 22 张双语知识卡和一套可核验的本地推理规则。需要更灵活的问答时，可以连接 DeepSeek；未连接时也能完整使用。</p>
+
+        <div class="hero-actions">
+          <a class="primary-action" href="#chat-panel">
+            <span data-i18n="startAsking">开始提问</span>
+            <span aria-hidden="true">↘</span>
+          </a>
+          <button class="secondary-action" type="button" data-open-settings>
+            <svg viewBox="0 0 20 20" aria-hidden="true">
+              <path d="m11.1 2-1.3 3.1-1.4.6L5.5 4 3 6.5 4.6 9l-.6 1.4L1 11.7v3l3.1 1.3.6 1.4L3 20l2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+            <span data-i18n="connectModel">接入大模型</span>
+          </button>
+        </div>
+
+        <div class="hero-stats" aria-label="Capabilities">
+          <div>
+            <strong>22</strong>
+            <span data-i18n="statCards">双语知识卡</span>
+          </div>
+          <div>
+            <strong>2</strong>
+            <span data-i18n="statEngines">工作引擎</span>
+          </div>
+          <div>
+            <strong>4</strong>
+            <span data-i18n="statCalculators">计算工具</span>
+          </div>
         </div>
       </div>
 
-      <div class="hero-formula" aria-label="独立误差合成公式">
-        <p class="formula-kicker">核心关系</p>
-        <div class="formula-display">
-          <span>u<sub>c</sub> =</span>
-          <span class="radical">
-            <span class="radical-sign">√</span>
-            <span class="radicand"><span class="sum-symbol">Σ</span><sub>i</sub> u<sub>i</sub><sup>2</sup></span>
-          </span>
+      <div class="hero-visual">
+        <img id="hero-illustration" src="assets/uncertainty-map.svg" alt="Repeated measurement points inside a tilted uncertainty ellipse">
+        <div class="floating-label label-one">u₁</div>
+        <div class="floating-label label-two">u₂</div>
+        <div class="floating-badge">
+          <span data-i18n="liveFormula">实时公式</span>
+          <strong>u<sub>c</sub> = √Σu<sub>i</sub><sup>2</sup></strong>
         </div>
-        <p>各分量相互独立时，方差可以相加。</p>
       </div>
     </section>
 
-    <section class="workspace" aria-label="课程知识智能体">
+    <section class="api-banner" id="api-banner" aria-labelledby="api-banner-title">
+      <div class="api-banner-icon" aria-hidden="true">
+        <svg viewBox="0 0 28 28">
+          <path d="M15.8 2 7 16h5.7L11 26l9.7-15H15l.8-9Z" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="api-banner-copy">
+        <div class="api-banner-title-row">
+          <h2 id="api-banner-title" data-i18n="apiTitle">接入 DeepSeek，获得更灵活的解释</h2>
+          <span class="recommended-tag" data-i18n="recommended">推荐</span>
+        </div>
+        <p data-i18n="apiBody">默认本地引擎无需密钥。连接后，模型会基于当前检索到的课程知识回答；接口失败时自动回退。</p>
+      </div>
+      <div class="api-banner-actions">
+        <span class="api-state" id="api-state"><span class="status-dot" aria-hidden="true"></span><span data-i18n="localAlwaysReady">本地模式可用</span></span>
+        <button class="connect-button" type="button" data-open-settings data-i18n="connectDeepSeek">连接 DeepSeek</button>
+      </div>
+    </section>
+
+    <section class="workspace" aria-label="Course assistant workspace">
       <aside class="topic-rail" aria-labelledby="topic-title">
-        <div class="rail-heading">
-          <p class="section-number">01</p>
-          <div>
-            <h2 id="topic-title">知识目录</h2>
-            <p>点击问题直接开始</p>
-          </div>
+        <div class="rail-header">
+          <p class="eyebrow">01 / EXPLORE</p>
+          <h2 id="topic-title" data-i18n="knowledgeMap">知识地图</h2>
+          <p data-i18n="knowledgeMapHint">点击问题，直接开始。</p>
         </div>
 
         <div class="topic-list">
-          <button class="topic-button active" type="button" data-prompt="误差合成的基本步骤是什么？">
-            <span class="topic-index">A</span>
-            <span>
-              <strong>合成流程</strong>
-              <small>从测量模型到结果报告</small>
-            </span>
+          <button class="topic-button active" type="button" data-prompt-zh="误差合成的基本步骤是什么？" data-prompt-en="What are the main steps in uncertainty propagation?">
+            <span class="topic-icon blue" aria-hidden="true">∿</span>
+            <span><strong data-i18n="topicWorkflow">合成流程</strong><small data-i18n="topicWorkflowSub">模型、分量、相关性与结果</small></span>
           </button>
-          <button class="topic-button" type="button" data-prompt="系统误差和随机误差应该怎样合成？">
-            <span class="topic-index">B</span>
-            <span>
-              <strong>误差性质</strong>
-              <small>代数修正与方差合成</small>
-            </span>
+          <button class="topic-button" type="button" data-prompt-zh="误差和不确定度有什么区别？" data-prompt-en="What is the difference between error and uncertainty?">
+            <span class="topic-icon coral" aria-hidden="true">≠</span>
+            <span><strong data-i18n="topicConcept">概念辨析</strong><small data-i18n="topicConceptSub">误差、分散性与可信程度</small></span>
           </button>
-          <button class="topic-button" type="button" data-prompt="误差和不确定度有什么区别？">
-            <span class="topic-index">C</span>
-            <span>
-              <strong>概念辨析</strong>
-              <small>误差、分散性、可信程度</small>
-            </span>
+          <button class="topic-button" type="button" data-prompt-zh="不确定度A类和B类怎样区分？" data-prompt-en="How should Type A and Type B uncertainty be distinguished?">
+            <span class="topic-icon yellow" aria-hidden="true">A/B</span>
+            <span><strong data-i18n="topicEvaluation">评定方法</strong><small data-i18n="topicEvaluationSub">A 类、B 类与分布换算</small></span>
           </button>
-          <button class="topic-button" type="button" data-prompt="不确定度A类和B类怎样区分？">
-            <span class="topic-index">D</span>
-            <span>
-              <strong>评定方法</strong>
-              <small>A 类、B 类与标准不确定度</small>
-            </span>
+          <button class="topic-button" type="button" data-prompt-zh="相关误差分量为什么不能直接平方合成？" data-prompt-en="Why can't correlated uncertainty components be combined with a simple root sum square?">
+            <span class="topic-icon mint" aria-hidden="true">r</span>
+            <span><strong data-i18n="topicCorrelation">相关分量</strong><small data-i18n="topicCorrelationSub">协方差与同源误差</small></span>
           </button>
-          <button class="topic-button" type="button" data-prompt="相关误差分量为什么不能直接平方合成？">
-            <span class="topic-index">E</span>
-            <span>
-              <strong>相关问题</strong>
-              <small>协方差与同源分量</small>
-            </span>
+          <button class="topic-button" type="button" data-prompt-zh="不确定度预算表应该包含哪些内容？" data-prompt-en="What should an uncertainty budget table contain?">
+            <span class="topic-icon violet" aria-hidden="true">▦</span>
+            <span><strong data-i18n="topicBudget">不确定度预算</strong><small data-i18n="topicBudgetSub">来源、灵敏系数与贡献</small></span>
           </button>
-          <button class="topic-button" type="button" data-prompt="误差合成常见考点和易错点有哪些？">
-            <span class="topic-index">F</span>
-            <span>
-              <strong>考点整理</strong>
-              <small>概念题、计算题与文字题</small>
-            </span>
+          <button class="topic-button" type="button" data-prompt-zh="误差合成常见考点和易错点有哪些？" data-prompt-en="What are the most common exam checkpoints and mistakes in error propagation?">
+            <span class="topic-icon blue" aria-hidden="true">✓</span>
+            <span><strong data-i18n="topicExam">考点整理</strong><small data-i18n="topicExamSub">概念、计算与文字题</small></span>
           </button>
         </div>
 
-        <div class="scope-note">
+        <div class="range-note">
           <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 3 4.8 6v5.4c0 4.4 3.1 8.5 7.2 9.6 4.1-1.1 7.2-5.2 7.2-9.6V6L12 3Z" fill="none" stroke="currentColor" stroke-width="1.7"/>
-            <path d="m8.6 12 2.2 2.2 4.6-4.7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M12 10v6m0-9v.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
-          <p><strong>范围约束</strong><br>只依据误差合成知识库作答；信息不足时会明确说明。</p>
+          <p data-i18n="scopeNote">范围外问题会明确拒答；计算条件不足时会指出缺少的信息。</p>
         </div>
       </aside>
 
       <section class="chat-card" id="chat-panel" aria-labelledby="chat-title">
         <header class="chat-header">
-          <div>
-            <p class="section-number">02</p>
-            <h2 id="chat-title">课程问答</h2>
+          <div class="chat-heading">
+            <p class="eyebrow">02 / ASK</p>
+            <h2 id="chat-title" data-i18n="chatTitle">课程问答</h2>
+            <p id="answer-source-label">
+              <span class="source-dot" aria-hidden="true"></span>
+              <span id="answer-source-text" data-i18n="localEngineReady">本地知识引擎已就绪</span>
+            </p>
           </div>
-          <div class="chat-actions">
-            <label class="mode-select" for="answer-mode">
-              <span>回答深度</span>
+          <div class="chat-controls">
+            <label class="select-control" for="answer-mode">
+              <span data-i18n="answerDepth">回答深度</span>
               <select id="answer-mode">
-                <option value="auto">自动判断</option>
-                <option value="brief">一句话概括</option>
-                <option value="detail">详细讲解</option>
+                <option value="auto" data-i18n="modeAuto">自动判断</option>
+                <option value="brief" data-i18n="modeBrief">一句话概括</option>
+                <option value="detail" data-i18n="modeDetail">详细讲解</option>
               </select>
             </label>
-            <button class="icon-button" id="clear-chat" type="button" title="清空对话" aria-label="清空对话">
+            <button class="icon-button" id="clear-chat" type="button" aria-label="Clear conversation" title="Clear conversation">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M4 7h16M9 7V4h6v3m-8 0 1 13h8l1-13M10 11v5m4-5v5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
@@ -151,148 +187,217 @@
           </div>
         </header>
 
-        <div class="conversation" id="conversation" aria-live="polite" aria-label="对话记录">
-          <article class="message assistant-message intro-message">
-            <div class="avatar" aria-hidden="true">测</div>
-            <div class="message-content">
-              <div class="message-label">
-                <span>课程助手</span>
-                <time>知识库已就绪</time>
-              </div>
-              <p>你好，我会先判断问题范围，再给出结论、公式和适用条件。你可以直接提问，也可以从下面四类问题开始。</p>
-              <div class="starter-grid">
-                <button type="button" data-prompt="用一句话说明测量不确定度是什么。">
-                  <span>概念</span>
-                  一句话说明不确定度
-                </button>
-                <button type="button" data-prompt="重复测量时，平均值的标准不确定度怎么算？">
-                  <span>方法</span>
-                  平均值的不确定度
-                </button>
-                <button type="button" data-prompt="某长度由两段相加，两段独立标准不确定度分别为0.2 mm和0.3 mm，请计算合成标准不确定度。">
-                  <span>计算</span>
-                  两段长度误差合成
-                </button>
-                <button type="button" data-prompt="请分析功率 P=I²R，若电流和电阻的相对标准不确定度分别为0.5%和1.0%，计算功率的相对标准不确定度。">
-                  <span>应用</span>
-                  P = I²R 的误差传递
-                </button>
-              </div>
-            </div>
-          </article>
-        </div>
+        <div class="conversation" id="conversation" aria-live="polite" aria-label="Conversation"></div>
 
         <form class="composer" id="question-form">
-          <label class="sr-only" for="question-input">输入课程问题</label>
-          <textarea id="question-input" rows="1" maxlength="500" placeholder="输入问题，例如：相关误差怎样合成？" autocomplete="off"></textarea>
-          <button class="send-button" type="submit" aria-label="发送问题">
+          <label class="sr-only" for="question-input" data-i18n="questionLabel">输入课程问题</label>
+          <textarea id="question-input" rows="1" maxlength="1200" data-i18n-placeholder="questionPlaceholder" placeholder="输入问题，例如：相关误差怎样合成？" autocomplete="off"></textarea>
+          <button class="send-button" type="submit" aria-label="Send question">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="m4 5 16 7-16 7 2.7-7L4 5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
               <path d="M6.7 12H20" fill="none" stroke="currentColor" stroke-width="1.8"/>
             </svg>
           </button>
         </form>
-        <p class="composer-hint">按 Enter 发送，Shift + Enter 换行。涉及相关性或单位时，请补充题目条件。</p>
+        <p class="composer-hint" data-i18n="composerHint">按 Enter 发送，Shift + Enter 换行。涉及相关性或单位时，请补充题目条件。</p>
       </section>
 
-      <aside class="evidence-panel" aria-label="计算与知识依据">
-        <section class="side-card" id="calculator" aria-labelledby="calculator-title">
-          <div class="side-card-heading">
-            <p class="section-number">03</p>
-            <div>
-              <h2 id="calculator-title">快速计算</h2>
-              <p>独立分量平方合成</p>
-            </div>
+      <aside class="side-column">
+        <section class="side-card calculator-card" id="tools" aria-labelledby="tools-title">
+          <div class="side-heading">
+            <p class="eyebrow">03 / CALCULATE</p>
+            <h2 id="tools-title" data-i18n="calculatorTitle">快速计算</h2>
           </div>
-          <form id="calculator-form">
-            <label for="component-values">标准不确定度分量</label>
-            <textarea id="component-values" rows="2" placeholder="例如 0.2, 0.3, 0.4">0.2, 0.3</textarea>
-            <div class="calculator-unit-row">
-              <label for="calculator-unit">统一单位</label>
-              <input id="calculator-unit" type="text" value="mm" maxlength="12">
+
+          <label class="select-control wide" for="calculator-method">
+            <span data-i18n="methodLabel">计算类型</span>
+            <select id="calculator-method">
+              <option value="rss" data-i18n="methodRss">独立分量平方合成</option>
+              <option value="correlation" data-i18n="methodCorrelation">两个相关分量</option>
+              <option value="mean" data-i18n="methodMean">重复测量平均值</option>
+              <option value="expanded" data-i18n="methodExpanded">扩展不确定度</option>
+            </select>
+          </label>
+
+          <form id="calculator-form" class="calculator-form">
+            <div class="calc-panel active" data-calc-panel="rss">
+              <label for="rss-values" data-i18n="rssValues">标准不确定度分量</label>
+              <textarea id="rss-values" rows="2" placeholder="0.2, 0.3, 0.4">0.2, 0.3</textarea>
+              <label for="rss-unit" data-i18n="unitLabel">统一单位</label>
+              <input id="rss-unit" type="text" value="mm" maxlength="12">
             </div>
+
+            <div class="calc-panel" data-calc-panel="correlation">
+              <label for="corr-u1" data-i18n="componentOne">分量 u₁</label>
+              <input id="corr-u1" type="number" min="0" step="any" value="0.2">
+              <label for="corr-u2" data-i18n="componentTwo">分量 u₂</label>
+              <input id="corr-u2" type="number" min="0" step="any" value="0.2">
+              <label for="corr-r" data-i18n="correlationCoefficient">相关系数 r</label>
+              <input id="corr-r" type="number" min="-1" max="1" step="0.05" value="1">
+            </div>
+
+            <div class="calc-panel" data-calc-panel="mean">
+              <label for="mean-s" data-i18n="sampleStandardDeviation">单次标准差 s</label>
+              <input id="mean-s" type="number" min="0" step="any" value="0.12">
+              <label for="mean-n" data-i18n="sampleCount">重复次数 n</label>
+              <input id="mean-n" type="number" min="2" step="1" value="6">
+            </div>
+
+            <div class="calc-panel" data-calc-panel="expanded">
+              <label for="expanded-uc" data-i18n="combinedUncertainty">合成标准不确定度 u<sub>c</sub></label>
+              <input id="expanded-uc" type="number" min="0" step="any" value="0.16">
+              <label for="expanded-k" data-i18n="coverageFactor">覆盖因子 k</label>
+              <input id="expanded-k" type="number" min="0" step="0.1" value="2">
+            </div>
+
             <button class="calculate-button" type="submit">
-              计算合成标准不确定度
+              <span data-i18n="calculate">计算</span>
               <span aria-hidden="true">→</span>
             </button>
           </form>
+
           <div class="calculator-result" id="calculator-result" aria-live="polite">
             <span>u<sub>c</sub></span>
             <strong>0.361 mm</strong>
           </div>
-          <p class="small-note">仅适用于相互独立的简单相加模型。相关性或乘除模型请在问答区说明。</p>
+          <p class="tiny-note" data-i18n="calculatorNote">独立分量工具默认采用简单相加模型；相关性和乘除模型可在问答区处理。</p>
         </section>
 
         <section class="side-card source-card" id="sources" aria-labelledby="sources-title">
-          <div class="side-card-heading">
-            <p class="section-number">04</p>
-            <div>
-              <h2 id="sources-title">知识依据</h2>
-              <p>术语与评定框架</p>
-            </div>
+          <div class="side-heading">
+            <p class="eyebrow">04 / VERIFY</p>
+            <h2 id="sources-title" data-i18n="sourcesTitle">知识依据</h2>
           </div>
-
           <div class="source-list">
             <a href="https://www.bipm.org/documents/20126/2071204/JCGM_100_2008_E.pdf" target="_blank" rel="noreferrer">
               <span class="source-code">GUM</span>
-              <span>
-                <strong>JCGM 100:2008</strong>
-                <small>测量不确定度评定与表示</small>
-              </span>
-              <svg viewBox="0 0 20 20" aria-hidden="true">
-                <path d="M6 14 14 6m-6 0h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+              <span><strong>JCGM 100:2008</strong><small data-i18n="sourceGum">测量不确定度评定与表示</small></span>
+              <span aria-hidden="true">↗</span>
             </a>
             <div class="source-item">
               <span class="source-code">JJF</span>
-              <span>
-                <strong>JJF 1059.1-2012</strong>
-                <small>国内测量不确定度技术规范</small>
-              </span>
+              <span><strong>JJF 1059.1-2012</strong><small data-i18n="sourceJjf">国内计量技术规范</small></span>
             </div>
             <a href="https://www.bipm.org/documents/20126/2071204/JCGM_200_2012.pdf" target="_blank" rel="noreferrer">
               <span class="source-code">VIM</span>
-              <span>
-                <strong>JCGM 200:2012</strong>
-                <small>测量学术语国际词汇</small>
-              </span>
-              <svg viewBox="0 0 20 20" aria-hidden="true">
-                <path d="M6 14 14 6m-6 0h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+              <span><strong>JCGM 200:2012</strong><small data-i18n="sourceVim">测量学术语国际词汇</small></span>
+              <span aria-hidden="true">↗</span>
             </a>
           </div>
-
           <div class="source-foot">
             <span class="status-dot" aria-hidden="true"></span>
-            回答采用统一的标准不确定度口径
+            <span data-i18n="sourceFoot">中文回答与英文回答使用同一知识库</span>
           </div>
         </section>
       </aside>
     </section>
 
-    <section class="method-strip" aria-label="回答原则">
-      <div>
-        <span>01</span>
-        <strong>先看条件</strong>
-        <p>独立、相关、已修正和未修正不能混为一谈。</p>
-      </div>
-      <div>
-        <span>02</span>
-        <strong>再算传递</strong>
-        <p>先用测量模型确定灵敏系数和统一量纲。</p>
-      </div>
-      <div>
-        <span>03</span>
-        <strong>最后说明</strong>
-        <p>结果附带适用条件、单位与必要的不确定度说明。</p>
-      </div>
+    <section class="method-strip" aria-label="How answers are produced">
+      <article>
+        <span class="method-number">01</span>
+        <h3 data-i18n="methodOneTitle">先看条件</h3>
+        <p data-i18n="methodOneBody">独立、相关、A 类、B 类和已修正误差不混用。</p>
+      </article>
+      <article>
+        <span class="method-number">02</span>
+        <h3 data-i18n="methodTwoTitle">再做传递</h3>
+        <p data-i18n="methodTwoBody">测量模型确定灵敏系数，计算器负责可验证的数值。</p>
+      </article>
+      <article>
+        <span class="method-number">03</span>
+        <h3 data-i18n="methodThreeTitle">最后核对</h3>
+        <p data-i18n="methodThreeBody">答案给出单位、适用条件与 GUM / JJF / VIM 依据。</p>
+      </article>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>误差合成课程知识智能体</p>
-    <p>知识范围：测量误差、不确定度评定与误差合成</p>
+    <div>
+      <strong>Error Propagation Lab</strong>
+      <p data-i18n="footerScope">知识范围：测量误差、不确定度评定与误差传递</p>
+    </div>
+    <button class="footer-settings" type="button" data-open-settings data-i18n="apiSettings">API 与引擎设置</button>
   </footer>
+
+  <dialog class="settings-dialog" id="settings-dialog" aria-labelledby="settings-title">
+    <form class="settings-form" id="settings-form">
+      <div class="dialog-heading">
+        <div>
+          <p class="eyebrow">MODEL CONTROL</p>
+          <h2 id="settings-title" data-i18n="settingsTitle">API 与引擎设置</h2>
+        </div>
+        <button class="icon-button" id="close-settings" type="button" aria-label="Close settings">×</button>
+      </div>
+
+      <div class="engine-choice">
+        <div>
+          <span class="engine-choice-icon">D</span>
+          <div>
+            <strong>DeepSeek</strong>
+            <p data-i18n="deepSeekDescription">适合更自由的解释与多轮追问，推荐使用。</p>
+          </div>
+        </div>
+        <label class="switch" for="use-api">
+          <input id="use-api" type="checkbox">
+          <span class="switch-track" aria-hidden="true"></span>
+          <span class="sr-only" data-i18n="enableApi">启用 API</span>
+        </label>
+      </div>
+
+      <div class="settings-grid">
+        <label>
+          <span data-i18n="provider">接口类型</span>
+          <select id="api-provider">
+            <option value="deepseek" data-i18n="providerDeepSeek">DeepSeek（推荐）</option>
+            <option value="custom" data-i18n="providerCustom">OpenAI 兼容接口</option>
+          </select>
+        </label>
+        <label>
+          <span data-i18n="modelName">模型</span>
+          <input id="api-model" type="text" value="deepseek-chat" list="model-options" spellcheck="false">
+          <datalist id="model-options">
+            <option value="deepseek-chat"></option>
+            <option value="deepseek-reasoner"></option>
+          </datalist>
+        </label>
+      </div>
+
+      <label class="full-field">
+        <span data-i18n="endpoint">接口地址</span>
+        <input id="api-endpoint" type="url" value="https://api.deepseek.com/chat/completions" spellcheck="false">
+      </label>
+
+      <div class="full-field">
+        <div class="field-label-row">
+          <label for="api-key" data-i18n="apiKey">API Key</label>
+          <a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noreferrer" data-i18n="getApiKey">获取 DeepSeek 密钥 ↗</a>
+        </div>
+        <div class="key-input">
+          <input id="api-key" type="password" placeholder="sk-..." autocomplete="off" spellcheck="false">
+          <button id="toggle-key" type="button" aria-label="Show or hide API key" title="Show or hide API key">◉</button>
+        </div>
+      </div>
+
+      <div class="security-note">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 3 4.8 6v5.4c0 4.4 3.1 8.5 7.2 9.6 4.1-1.1 7.2-5.2 7.2-9.6V6L12 3Z" fill="none" stroke="currentColor" stroke-width="1.7"/>
+          <path d="M12 8v5m0 3v.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <p data-i18n="securityNote">密钥只保存在当前标签页的会话存储中，关闭标签页后清除；不会写入 GitHub 仓库。请仅使用自己的有效密钥。</p>
+      </div>
+
+      <div class="dialog-status" id="dialog-status" aria-live="polite"></div>
+      <div class="dialog-actions">
+        <button class="text-button" id="clear-api" type="button" data-i18n="clearKey">清除密钥</button>
+        <div>
+          <button class="outline-button" id="test-api" type="button" data-i18n="testConnection">测试连接</button>
+          <button class="primary-action small" id="save-settings" type="submit" data-i18n="saveSettings">保存设置</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="knowledge.js"></script>
   <script src="core.js"></script>

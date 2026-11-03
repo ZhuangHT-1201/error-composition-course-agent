@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 540" role="img" aria-labelledby="title desc">
+  <title id="title">Uncertainty map for a two-dimensional measurement</title>
+  <desc id="desc">A scatter of repeated measurements inside a tilted uncertainty ellipse, with component labels and a combined uncertainty badge.</desc>
+  <defs>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7f9ff"/>
+      <stop offset="1" stop-color="#eef3ff"/>
+    </linearGradient>
+    <linearGradient id="ellipse" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#35d7ff" stop-opacity=".38"/>
+      <stop offset="1" stop-color="#3757ff" stop-opacity=".09"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#203dbb" flood-opacity=".14"/>
+    </filter>
+  </defs>
+  <rect width="760" height="540" rx="36" fill="url(#panel)"/>
+  <circle cx="646" cy="94" r="88" fill="#ffdf7a" opacity=".55"/>
+  <circle cx="102" cy="454" r="112" fill="#55e5e0" opacity=".18"/>
+  <path d="M0 430C178 352 246 520 424 430s230-68 336-18v128H0Z" fill="#dfe8ff" opacity=".68"/>
+  <g stroke="#cbd6f6" stroke-width="1">
+    <path d="M92 92v330M92 422h505"/>
+    <path d="M92 342h505M92 262h505M92 182h505" opacity=".55"/>
+    <path d="M192 92v330M292 92v330M392 92v330M492 92v330" opacity=".55"/>
+  </g>
+  <path d="M92 422 618 96" fill="none" stroke="#1e2f71" stroke-width="2" stroke-dasharray="7 8" opacity=".35"/>
+  <g filter="url(#shadow)">
+    <ellipse cx="337" cy="270" rx="172" ry="82" transform="rotate(-27 337 270)" fill="url(#ellipse)" stroke="#3757ff" stroke-width="2.4"/>
+  </g>
+  <g fill="#3757ff">
+    <circle cx="229" cy="357" r="7"/>
+    <circle cx="249" cy="343" r="7"/>
+    <circle cx="266" cy="326" r="7"/>
+    <circle cx="286" cy="322" r="7"/>
+    <circle cx="303" cy="304" r="7"/>
+    <circle cx="321" cy="305" r="7"/>
+    <circle cx="337" cy="282" r="7"/>
+    <circle cx="359" cy="275" r="7"/>
+    <circle cx="372" cy="255" r="7"/>
+    <circle cx="391" cy="250" r="7"/>
+    <circle cx="409" cy="228" r="7"/>
+    <circle cx="431" cy="211" r="7"/>
+  </g>
+  <circle cx="330" cy="284" r="13" fill="#ff7452" stroke="#fff" stroke-width="4"/>
+  <path d="M330 284 250 354" stroke="#ff7452" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M330 284 409 228" stroke="#0bafb5" stroke-width="2.5" stroke-linecap="round"/>
+  <g font-family="Arial, sans-serif" font-size="15" font-weight="700">
+    <rect x="112" y="316" width="102" height="38" rx="19" fill="#fff" stroke="#dbe3fa"/>
+    <text x="163" y="341" text-anchor="middle" fill="#17224b">u₁ contribution</text>
+    <rect x="404" y="321" width="104" height="38" rx="19" fill="#fff" stroke="#dbe3fa"/>
+    <text x="456" y="346" text-anchor="middle" fill="#17224b">u₂ contribution</text>
+    <rect x="417" y="102" width="196" height="74" rx="20" fill="#17224b"/>
+    <text x="445" y="132" fill="#7de8f7" font-size="12" letter-spacing="1.4">COMBINED STANDARD</text>
+    <text x="445" y="157" fill="#fff" font-size="22">u_c = √(u₁² + u₂²)</text>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#6a78a5">
+    <text x="620" y="446">measurand x</text>
+    <text x="68" y="86">measurand y</text>
+    <text x="275" y="486" fill="#1e2f71" font-size="14">Repeated results and their uncertainty region</text>
+  </g>
+</svg>
