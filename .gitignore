@@ -1,3 +1,6 @@
 qa*/
 qa-final/
 *.log
+.env
+.env.local
+.env.*.local

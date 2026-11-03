@@ -37,6 +37,22 @@ async function run() {
   const architecturePath = path.resolve(__dirname, "..", "assets", "architecture.svg");
   await architecture.goto(pathToFileURL(architecturePath).href, { waitUntil: "load" });
   await architecture.screenshot({ path: path.join(outputDir, "architecture.png"), fullPage: false });
+
+  const repositoryContext = await browser.newContext({
+    viewport: { width: 1440, height: 1000 },
+    deviceScaleFactor: 1,
+    ignoreHTTPSErrors: true
+  });
+  const repository = await repositoryContext.newPage();
+  await repository.goto("https://github.com/ZhuangHT-1201/error-composition-course-agent", {
+    waitUntil: "domcontentloaded",
+    timeout: 60000
+  });
+  await repository.waitForTimeout(2500);
+  await repository.screenshot({
+    path: path.join(outputDir, "repository.png"),
+    clip: { x: 0, y: 0, width: 1040, height: 850 }
+  });
   await browser.close();
   console.log(outputDir);
 }

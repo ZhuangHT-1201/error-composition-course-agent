@@ -23,6 +23,7 @@ A bilingual course assistant for measurement error and uncertainty propagation. 
   | Expanded uncertainty | Combined standard uncertainty and coverage factor | Expanded uncertainty |
 
 - Optionally routes eligible questions through DeepSeek with locally retrieved course context.
+- The deployed DeepSeek path has been verified with a real personal API key; no key or private credential is stored in this repository.
 - Automatically falls back to the local engine if the API request fails.
 
 ## How the dual engine works
