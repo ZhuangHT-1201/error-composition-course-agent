@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="面向测量误差合成的课程知识智能体，支持分层问答、范围判断、公式解释与独立分量计算。">
+  <meta name="theme-color" content="#102b2d">
+  <title>误差合成课堂助手</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#chat-panel">跳到问答区</a>
+
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="误差合成课堂助手首页">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" role="img">
+          <path d="M7 23.5 14.8 8l3.5 7.3L23 9l2 14.5H7Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+          <path d="M11 19.5h11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span>
+        <strong>测量课程</strong>
+        <small>误差合成 · 知识助手</small>
+      </span>
+    </a>
+
+    <nav class="top-nav" aria-label="主导航">
+      <a href="#chat-panel">课程问答</a>
+      <a href="#calculator">快速计算</a>
+      <a href="#sources">知识依据</a>
+    </nav>
+
+    <div class="availability" aria-label="服务状态">
+      <span class="status-dot" aria-hidden="true"></span>
+      可直接使用
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="eyebrow">测量误差与不确定度</p>
+        <h1 id="page-title">误差合成课堂助手</h1>
+        <p class="hero-intro">把课程中的误差传递、独立合成、相关性、A 类与 B 类评定和扩展不确定度放进同一个问答空间。回答会给出适用条件，并标出知识依据。</p>
+        <div class="hero-meta" aria-label="主要功能">
+          <span>按难度分层</span>
+          <span>公式可追溯</span>
+          <span>超范围拒答</span>
+        </div>
+      </div>
+
+      <div class="hero-formula" aria-label="独立误差合成公式">
+        <p class="formula-kicker">核心关系</p>
+        <div class="formula-display">
+          <span>u<sub>c</sub> =</span>
+          <span class="radical">
+            <span class="radical-sign">√</span>
+            <span class="radicand"><span class="sum-symbol">Σ</span><sub>i</sub> u<sub>i</sub><sup>2</sup></span>
+          </span>
+        </div>
+        <p>各分量相互独立时，方差可以相加。</p>
+      </div>
+    </section>
+
+    <section class="workspace" aria-label="课程知识智能体">
+      <aside class="topic-rail" aria-labelledby="topic-title">
+        <div class="rail-heading">
+          <p class="section-number">01</p>
+          <div>
+            <h2 id="topic-title">知识目录</h2>
+            <p>点击问题直接开始</p>
+          </div>
+        </div>
+
+        <div class="topic-list">
+          <button class="topic-button active" type="button" data-prompt="误差合成的基本步骤是什么？">
+            <span class="topic-index">A</span>
+            <span>
+              <strong>合成流程</strong>
+              <small>从测量模型到结果报告</small>
+            </span>
+          </button>
+          <button class="topic-button" type="button" data-prompt="系统误差和随机误差应该怎样合成？">
+            <span class="topic-index">B</span>
+            <span>
+              <strong>误差性质</strong>
+              <small>代数修正与方差合成</small>
+            </span>
+          </button>
+          <button class="topic-button" type="button" data-prompt="误差和不确定度有什么区别？">
+            <span class="topic-index">C</span>
+            <span>
+              <strong>概念辨析</strong>
+              <small>误差、分散性、可信程度</small>
+            </span>
+          </button>
+          <button class="topic-button" type="button" data-prompt="不确定度A类和B类怎样区分？">
+            <span class="topic-index">D</span>
+            <span>
+              <strong>评定方法</strong>
+              <small>A 类、B 类与标准不确定度</small>
+            </span>
+          </button>
+          <button class="topic-button" type="button" data-prompt="相关误差分量为什么不能直接平方合成？">
+            <span class="topic-index">E</span>
+            <span>
+              <strong>相关问题</strong>
+              <small>协方差与同源分量</small>
+            </span>
+          </button>
+          <button class="topic-button" type="button" data-prompt="误差合成常见考点和易错点有哪些？">
+            <span class="topic-index">F</span>
+            <span>
+              <strong>考点整理</strong>
+              <small>概念题、计算题与文字题</small>
+            </span>
+          </button>
+        </div>
+
+        <div class="scope-note">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3 4.8 6v5.4c0 4.4 3.1 8.5 7.2 9.6 4.1-1.1 7.2-5.2 7.2-9.6V6L12 3Z" fill="none" stroke="currentColor" stroke-width="1.7"/>
+            <path d="m8.6 12 2.2 2.2 4.6-4.7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p><strong>范围约束</strong><br>只依据误差合成知识库作答；信息不足时会明确说明。</p>
+        </div>
+      </aside>
+
+      <section class="chat-card" id="chat-panel" aria-labelledby="chat-title">
+        <header class="chat-header">
+          <div>
+            <p class="section-number">02</p>
+            <h2 id="chat-title">课程问答</h2>
+          </div>
+          <div class="chat-actions">
+            <label class="mode-select" for="answer-mode">
+              <span>回答深度</span>
+              <select id="answer-mode">
+                <option value="auto">自动判断</option>
+                <option value="brief">一句话概括</option>
+                <option value="detail">详细讲解</option>
+              </select>
+            </label>
+            <button class="icon-button" id="clear-chat" type="button" title="清空对话" aria-label="清空对话">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 7h16M9 7V4h6v3m-8 0 1 13h8l1-13M10 11v5m4-5v5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </header>
+
+        <div class="conversation" id="conversation" aria-live="polite" aria-label="对话记录">
+          <article class="message assistant-message intro-message">
+            <div class="avatar" aria-hidden="true">测</div>
+            <div class="message-content">
+              <div class="message-label">
+                <span>课程助手</span>
+                <time>知识库已就绪</time>
+              </div>
+              <p>你好，我会先判断问题范围，再给出结论、公式和适用条件。你可以直接提问，也可以从下面四类问题开始。</p>
+              <div class="starter-grid">
+                <button type="button" data-prompt="用一句话说明测量不确定度是什么。">
+                  <span>概念</span>
+                  一句话说明不确定度
+                </button>
+                <button type="button" data-prompt="重复测量时，平均值的标准不确定度怎么算？">
+                  <span>方法</span>
+                  平均值的不确定度
+                </button>
+                <button type="button" data-prompt="某长度由两段相加，两段独立标准不确定度分别为0.2 mm和0.3 mm，请计算合成标准不确定度。">
+                  <span>计算</span>
+                  两段长度误差合成
+                </button>
+                <button type="button" data-prompt="请分析功率 P=I²R，若电流和电阻的相对标准不确定度分别为0.5%和1.0%，计算功率的相对标准不确定度。">
+                  <span>应用</span>
+                  P = I²R 的误差传递
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <form class="composer" id="question-form">
+          <label class="sr-only" for="question-input">输入课程问题</label>
+          <textarea id="question-input" rows="1" maxlength="500" placeholder="输入问题，例如：相关误差怎样合成？" autocomplete="off"></textarea>
+          <button class="send-button" type="submit" aria-label="发送问题">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m4 5 16 7-16 7 2.7-7L4 5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              <path d="M6.7 12H20" fill="none" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+          </button>
+        </form>
+        <p class="composer-hint">按 Enter 发送，Shift + Enter 换行。涉及相关性或单位时，请补充题目条件。</p>
+      </section>
+
+      <aside class="evidence-panel" aria-label="计算与知识依据">
+        <section class="side-card" id="calculator" aria-labelledby="calculator-title">
+          <div class="side-card-heading">
+            <p class="section-number">03</p>
+            <div>
+              <h2 id="calculator-title">快速计算</h2>
+              <p>独立分量平方合成</p>
+            </div>
+          </div>
+          <form id="calculator-form">
+            <label for="component-values">标准不确定度分量</label>
+            <textarea id="component-values" rows="2" placeholder="例如 0.2, 0.3, 0.4">0.2, 0.3</textarea>
+            <div class="calculator-unit-row">
+              <label for="calculator-unit">统一单位</label>
+              <input id="calculator-unit" type="text" value="mm" maxlength="12">
+            </div>
+            <button class="calculate-button" type="submit">
+              计算合成标准不确定度
+              <span aria-hidden="true">→</span>
+            </button>
+          </form>
+          <div class="calculator-result" id="calculator-result" aria-live="polite">
+            <span>u<sub>c</sub></span>
+            <strong>0.361 mm</strong>
+          </div>
+          <p class="small-note">仅适用于相互独立的简单相加模型。相关性或乘除模型请在问答区说明。</p>
+        </section>
+
+        <section class="side-card source-card" id="sources" aria-labelledby="sources-title">
+          <div class="side-card-heading">
+            <p class="section-number">04</p>
+            <div>
+              <h2 id="sources-title">知识依据</h2>
+              <p>术语与评定框架</p>
+            </div>
+          </div>
+
+          <div class="source-list">
+            <a href="https://www.bipm.org/documents/20126/2071204/JCGM_100_2008_E.pdf" target="_blank" rel="noreferrer">
+              <span class="source-code">GUM</span>
+              <span>
+                <strong>JCGM 100:2008</strong>
+                <small>测量不确定度评定与表示</small>
+              </span>
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M6 14 14 6m-6 0h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <div class="source-item">
+              <span class="source-code">JJF</span>
+              <span>
+                <strong>JJF 1059.1-2012</strong>
+                <small>国内测量不确定度技术规范</small>
+              </span>
+            </div>
+            <a href="https://www.bipm.org/documents/20126/2071204/JCGM_200_2012.pdf" target="_blank" rel="noreferrer">
+              <span class="source-code">VIM</span>
+              <span>
+                <strong>JCGM 200:2012</strong>
+                <small>测量学术语国际词汇</small>
+              </span>
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M6 14 14 6m-6 0h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+
+          <div class="source-foot">
+            <span class="status-dot" aria-hidden="true"></span>
+            回答采用统一的标准不确定度口径
+          </div>
+        </section>
+      </aside>
+    </section>
+
+    <section class="method-strip" aria-label="回答原则">
+      <div>
+        <span>01</span>
+        <strong>先看条件</strong>
+        <p>独立、相关、已修正和未修正不能混为一谈。</p>
+      </div>
+      <div>
+        <span>02</span>
+        <strong>再算传递</strong>
+        <p>先用测量模型确定灵敏系数和统一量纲。</p>
+      </div>
+      <div>
+        <span>03</span>
+        <strong>最后说明</strong>
+        <p>结果附带适用条件、单位与必要的不确定度说明。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>误差合成课程知识智能体</p>
+    <p>知识范围：测量误差、不确定度评定与误差合成</p>
+  </footer>
+
+  <script src="knowledge.js"></script>
+  <script src="core.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
