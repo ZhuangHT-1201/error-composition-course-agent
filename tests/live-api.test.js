@@ -93,6 +93,7 @@ async function run() {
     if (!answer) throw new Error("DeepSeek returned an empty rendered answer");
     await page.waitForTimeout(350);
     await page.locator(".chat-card").screenshot({ path: path.join(outputDir, "api-live-answer.png") });
+    await apiMessage.screenshot({ path: path.join(outputDir, "api-live-crop.png") });
     console.log(`LIVE_API_PASS latency_ms=${Date.now() - started} answer_chars=${answer.length}`);
   } else {
     const fallback = await page.locator(".fallback-notice").last().innerText();
